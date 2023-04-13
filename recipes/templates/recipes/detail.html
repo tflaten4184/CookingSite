@@ -6,9 +6,17 @@
     <h2>Detail for recipe {{recipe}}</h2>
     <h3>Ingredients:</h3>
     {% comment %} {{ recipe.ingredients.all }} {% endcomment %}
-    {% for ingredient in recipe.ingredients.all %}
-        <ul>
-            {{ingredient}}
-        </ul>
-    {% endfor %}
+    <ul>
+        {% for ingredient in recipe.ingredients.all %}
+            <li>* {{ingredient}}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Steps:</h3>
+    <ol>
+        {% for step in recipe.steps.all %}
+            <li>{{ step.text }}</li>
+        {% endfor %}
+    </ol>
+
 {% endblock body %}
