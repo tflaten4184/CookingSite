@@ -3,11 +3,19 @@
 {% block title %}Recipes{% endblock title %}
 {% block body %}
     {% if recipes_list %}
-    <ul>
         {% for recipe in recipes_list %}
-            <li><a href="/recipes/{{ recipe.id }}/">{{ recipe.name }}</a></i></li>
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">{{ recipe.name }}</h5>
+                  <p class="card-text">Placeholder description for this delicious recipe.</p>
+                  {# <a href="/recipes/{{ recipe.id }}/" class="btn btn-primary">Details</a> #}
+                  <a href="{% url 'detail' recipe.id %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+
         {% endfor %}
-    </ul>
     {% else %}
         <p>No recipes found.</p>
     {% endif %}
