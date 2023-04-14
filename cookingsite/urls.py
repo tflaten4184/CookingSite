@@ -18,8 +18,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
+
+def redirect_to_recipes(request):
+    return redirect('recipes:index')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipes/', include("recipes.urls")),
+    path('', redirect_to_recipes),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -11,7 +11,7 @@
                   <h5 class="card-title">{{ recipe.name }}</h5>
                   <p class="card-text">Placeholder description for this delicious recipe.</p>
                   {# <a href="/recipes/{{ recipe.id }}/" class="btn btn-primary">Details</a> #}
-                  <a href="{% url 'detail' recipe.id %}" class="btn btn-primary">Details</a>
+                  <a href="{% url 'recipes:detail' recipe.id %}" class="btn btn-primary">Details</a>
                 </div>
             </div>
 
