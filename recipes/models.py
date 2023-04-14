@@ -21,7 +21,7 @@ class Ingredient(models.Model):
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="ingredients") # many to one
 
     def __str__(self) -> str:
-        return f"{self.quantity} {self.unit} {self.name}"
+        return f"{self.quantity.normalize()} {self.unit} {self.name}"
     
 class Step(models.Model):
 

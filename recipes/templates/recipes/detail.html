@@ -5,12 +5,16 @@
 {% block body %}
     <h2>Detail for recipe {{recipe}}</h2>
     <h3>Ingredients:</h3>
-    {% comment %} {{ recipe.ingredients.all }} {% endcomment %}
-    <ul>
+
         {% for ingredient in recipe.ingredients.all %}
-            <li>* {{ingredient}}</li>
+
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              {{ ingredient }}
+            </label>
+        </div>
         {% endfor %}
-    </ul>
 
     <h3>Steps:</h3>
     <ol>
