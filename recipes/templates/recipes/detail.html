@@ -4,8 +4,10 @@
 
 {% block body %}
     <h2>Detail for recipe {{recipe}}</h2>
+    <hr>
     <h3>Ingredients:</h3>
 
+    <ul class="border border-primary rounded p-3">
         {% for ingredient in recipe.ingredients.all %}
 
         <div class="form-check">
@@ -15,9 +17,10 @@
             </label>
         </div>
         {% endfor %}
-
+    </ul>
+    <hr>
     <h3>Steps:</h3>
-    <ol>
+    <ol class="border border-primary rounded py-3 px-4">
         {% for step in recipe.steps.all %}
             <li>{{ step.text }}</li>
         {% endfor %}

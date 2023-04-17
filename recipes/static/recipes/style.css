@@ -1,9 +1,29 @@
+:root {
+    --persian-red: #bb4430ff;
+    --sunset: #f2d0a4ff;
+    --papaya-whip: #ffecccff;
+    --dim-gray: #707070ff;
+    --ultra-violet: #5b5f97ff;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
 body {
-    background: rgb(226, 181, 121);
+    background: var(--persian-red);
+    min-height: 100%;
 }
 
 .navbar .container-fluid {
     background-color: rgb(224, 200, 131);
 }
 
+.container {
+    background: var(--sunset);
+}
 
+.border-primary {
+    border: 1px solid var(--dim-gray) !important;
+}
