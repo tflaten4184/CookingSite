@@ -5,6 +5,10 @@
 {% block body %}
     <h2>Detail for recipe {{recipe}}</h2>
     <hr>
+    <div class="container col-sm-6 col-lg-6">
+        <img src="{{ recipe.image.url }}" alt="" class="img-fluid">
+    </div>
+    <hr>
     <h3>Ingredients:</h3>
 
     <ul class="border border-primary rounded p-3">

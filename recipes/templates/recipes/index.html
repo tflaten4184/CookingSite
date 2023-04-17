@@ -4,22 +4,24 @@
 {% block title %}Recipes{% endblock title %}
 {% block body %}
     {% if recipes_list %}
-        {% for recipe in recipes_list %}
+        <div class="row">
+            {% for recipe in recipes_list %}
 
-            <div class="card" style="width: 18rem;">
-                {% comment %} <img class="card-img-top" src="" alt="Card image cap"> {% endcomment %}
-                {% thumbnail recipe.image "240x240" crop="center" as im %}
-                    <img class="img-fluid w-100" src="{{ im.url }}" alt="{{ recipe.name }} image" width="{{ im.width }}" height="{{ im.height }}">
-                {% endthumbnail %}
-                <div class="card-body">
-                  <h5 class="card-title">{{ recipe.name }}</h5>
-                  <p class="card-text">Placeholder description for this delicious recipe.</p>
-                  {# <a href="/recipes/{{ recipe.id }}/" class="btn btn-primary">Details</a> #}
-                  <a href="{% url 'recipes:detail' recipe.id %}" class="btn btn-primary">Details</a>
+                <div class="card col-md-3 m-3">
+                    {% comment %} <img class="card-img-top" src="" alt="Card image cap"> {% endcomment %}
+                    {% thumbnail recipe.image "240x240" crop="center" as im %}
+                        <img class="img-fluid w-100" src="{{ im.url }}" alt="{{ recipe.name }} image" width="{{ im.width }}" height="{{ im.height }}">
+                    {% endthumbnail %}
+                    <div class="card-body">
+                    <h5 class="card-title">{{ recipe.name }}</h5>
+                    <p class="card-text">Placeholder description for this delicious recipe.</p>
+                    {# <a href="/recipes/{{ recipe.id }}/" class="btn btn-primary">Details</a> #}
+                    <a href="{% url 'recipes:detail' recipe.id %}" class="btn btn-primary">Details</a>
+                    </div>
                 </div>
-            </div>
 
-        {% endfor %}
+            {% endfor %}
+        </div>
     {% else %}
         <p>No recipes found.</p>
     {% endif %}
