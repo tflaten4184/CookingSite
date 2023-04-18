@@ -7,6 +7,7 @@ name = "pypi"
 django = "*"
 sorl-thumbnail = "*"
 pillow = "*"
+pint = "*"
 
 [dev-packages]
 
