@@ -1,15 +1,23 @@
 from django.db import models
+from pint import UnitRegistry
+from . import ConversionUtil
 
 class Recipe(models.Model):
 
     name = models.CharField(max_length=100)
+    description = models.TextField()
     image = models.ImageField()
 
     # For later, other fields:
-    # Image?
     # Steps? (list of "step" objects, or just a simple string for now)
     # Author?
     # Link?
+
+    @property
+    def calculated_cost(self):
+        # TODO:
+        # Get collection of all RecipeIngredients and total up the calculated_cost all, using related_manager as a reverse reference. *********************
+        pass
 
     def __str__(self):
         return f"Recipe for {self.name}"
@@ -17,13 +25,36 @@ class Recipe(models.Model):
 class Ingredient(models.Model):
 
     name = models.CharField(max_length=100)
-    quantity = models.DecimalField(decimal_places=2, max_digits=1000)
-    unit = models.CharField(max_length=100)
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="ingredients") # many to one
+    base_unit = models.CharField(max_length=100)
+    base_price = models.DecimalField(decimal_places=2, max_digits=1000)
 
     def __str__(self) -> str:
-        return f"{self.quantity.normalize()} {self.unit} {self.name}"
+        return f"{self.base_unit} {self.name} at {self.base_price}"
     
+class RecipeIngredient(models.Model):
+    
+    # name = models.CharField(max_length=100)
+    unit = models.CharField(max_length=100)
+    quantity = models.FloatField()
+    # calculated_cost = models.FloatField() # ***** (derived value)
+    # Need: two foreign keys
+    # recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="recipe_ingredients") # many to one
+
+    
+    @property
+    def calculated_cost(self):
+        # ?Use related_manager (reverse reference) to get base unit and cost per base unit?
+        # Convert recipe's quantity and unit to base unit
+        # Multiply to get cost for this RecipeIngredient
+        return ConversionUtil.ConversionUtil.convert_ingredient_to_dollars(self, self.ingredient)
+
+
+    def __str__(self) -> str:
+        return f"RecipeIngredient {self.ingredient.name} for Recipe {self.recipe.name} at cost {self.calculated_cost}"
+    
+
 class Step(models.Model):
 
     number = models.SmallIntegerField()

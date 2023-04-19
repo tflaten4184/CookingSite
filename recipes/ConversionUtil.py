@@ -22,13 +22,17 @@ class ConversionUtil():
     
     def convert_ingredient_to_dollars(recipeIngredient, ingredient):
 
+        # First, need to check if the unit is nontraditional (for example, "1 whole onion")
+        if ingredient.base_unit == "whole":
+            return recipeIngredient.quantity * ingredient.base_price
+
         ureg = ConversionUtil.ureg
 
         # 1) Parse input unit, quantity
         input_measure = ureg(f"{str(recipeIngredient.quantity) + recipeIngredient.unit}")
 
         # 2) Convert input unit to base unit, then multiply by rate
-        converted_price = input_measure.to(ureg(ingredient.base_unit)).magnitude * ingredient.base_price
+        converted_price = input_measure.to(ureg(ingredient.base_unit)).magnitude * float(ingredient.base_price)
 
         return converted_price
 
@@ -46,10 +50,18 @@ class RecipeIngredient():
 
 if __name__ == "__main__":
         
-    # Initialize ingredient and recipeIngredient
+    # Test case: typical unit conversion
 
     test_ingredient = Ingredient(3.10, "gal")
     test_recipeIngredient = RecipeIngredient(2, "cup")
+
+    cost = ConversionUtil.convert_ingredient_to_dollars(test_recipeIngredient, test_ingredient)
+    print(cost)
+
+
+    # Test case: nontraditional unit ("whole onion")
+    test_ingredient = Ingredient(0.69, "whole")
+    test_recipeIngredient = RecipeIngredient(2, "whole")
 
     cost = ConversionUtil.convert_ingredient_to_dollars(test_recipeIngredient, test_ingredient)
     print(cost)
