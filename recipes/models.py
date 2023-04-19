@@ -17,10 +17,17 @@ class Recipe(models.Model):
     def calculated_cost(self):
         # TODO:
         # Get collection of all RecipeIngredients and total up the calculated_cost all, using related_manager as a reverse reference. *********************
-        pass
+        print("in function calculated_cost")
+        recipe_ingredients = RecipeIngredient.objects.filter(recipe=self.id)
+        print(recipe_ingredients)
+        total = 0
+        for ing in recipe_ingredients:
+            print(ing.calculated_cost)
+            total += ing.calculated_cost
+        return total
 
     def __str__(self):
-        return f"Recipe for {self.name}"
+        return f"Recipe for {self.name}, costs {self.calculated_cost}"
     
 class Ingredient(models.Model):
 
