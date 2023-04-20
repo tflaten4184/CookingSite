@@ -10,16 +10,6 @@ class ConversionUtil():
 
     print("Initializing UnitRegistry")
     ureg = UnitRegistry()
-
-    # def convert_ingredient_to_dollars(input_quantity, input_unit, base_price, base_unit):
-
-    #     # 1) Parse input unit, quantity
-    #     input_measure = ureg(f"{str(input_quantity) + input_unit}")
-
-    #     # 2) Convert input unit to base unit
-    #     converted_price = input_measure.to(ureg(base_unit)).magnitude * base_price
-
-    #     return converted_price
     
     def convert_ingredient_to_dollars(recipeIngredient, ingredient):
 
