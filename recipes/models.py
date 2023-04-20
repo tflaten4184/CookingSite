@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.db import models
 from pint import UnitRegistry
 from . import ConversionUtil
@@ -20,10 +21,10 @@ class Recipe(models.Model):
         print("in function calculated_cost")
         recipe_ingredients = RecipeIngredient.objects.filter(recipe=self.id)
         print(recipe_ingredients)
-        total = 0
+        total = Decimal(0)
         for ing in recipe_ingredients:
             print(ing.calculated_cost)
-            total += ing.calculated_cost
+            total += Decimal(ing.calculated_cost)
         return total
 
     def __str__(self):
@@ -36,13 +37,13 @@ class Ingredient(models.Model):
     base_price = models.DecimalField(decimal_places=2, max_digits=1000)
 
     def __str__(self) -> str:
-        return f"{self.base_unit} {self.name} at {self.base_price}"
+        return f"{self.name}: {self.base_unit} at {self.base_price}"
     
 class RecipeIngredient(models.Model):
     
     # name = models.CharField(max_length=100)
+    quantity = models.DecimalField(decimal_places=2, max_digits=1000)
     unit = models.CharField(max_length=100)
-    quantity = models.FloatField()
     # calculated_cost = models.FloatField() # ***** (derived value)
     # Need: two foreign keys
     # recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
@@ -55,7 +56,7 @@ class RecipeIngredient(models.Model):
         # ?Use related_manager (reverse reference) to get base unit and cost per base unit?
         # Convert recipe's quantity and unit to base unit
         # Multiply to get cost for this RecipeIngredient
-        return ConversionUtil.ConversionUtil.convert_ingredient_to_dollars(self, self.ingredient)
+        return Decimal(ConversionUtil.ConversionUtil.convert_ingredient_to_dollars(self, self.ingredient)).quantize(Decimal('.01'), rounding="ROUND_UP")
 
 
     def __str__(self) -> str:

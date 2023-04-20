@@ -3,6 +3,7 @@
 # First, let's do volume.
 # For now, assume our base unit will be "cups".
 
+from decimal import Decimal
 from pint import UnitRegistry
 
 class ConversionUtil():
@@ -24,7 +25,7 @@ class ConversionUtil():
 
         # First, need to check if the unit is nontraditional (for example, "1 whole onion")
         if ingredient.base_unit == "whole":
-            return recipeIngredient.quantity * ingredient.base_price
+            return float(recipeIngredient.quantity) * float(ingredient.base_price)
 
         ureg = ConversionUtil.ureg
 
@@ -34,8 +35,10 @@ class ConversionUtil():
         # 2) Convert input unit to base unit, then multiply by rate
         converted_price = input_measure.to(ureg(ingredient.base_unit)).magnitude * float(ingredient.base_price)
 
-        return converted_price
+        return Decimal(converted_price)
 
+
+# These classes are only used for testing the function
 class Ingredient():
     def __init__(self, base_price, base_unit) -> None:
         self.base_price = base_price
