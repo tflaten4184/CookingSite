@@ -6,7 +6,7 @@ class Recipe(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField()
+    image = models.ImageField(null=True, blank=True)
 
     # For later, other fields:
     # Author?
