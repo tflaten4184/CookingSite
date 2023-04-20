@@ -3,6 +3,7 @@ from .models import Recipe, Ingredient, RecipeIngredient, Step
 
 class RecipeIngredientInline(admin.TabularInline):
     model = RecipeIngredient
+    autocomplete_fields = ['ingredient']
 
 class StepInline(admin.TabularInline):
     model = Step
@@ -19,6 +20,7 @@ class RecipeAdmin(admin.ModelAdmin):
 
 class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient
+    search_fields = ['name']
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient
