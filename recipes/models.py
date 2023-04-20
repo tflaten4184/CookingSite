@@ -1,6 +1,5 @@
 from decimal import Decimal
 from django.db import models
-from pint import UnitRegistry
 from .ConversionUtil import ConversionUtil
 
 class Recipe(models.Model):
@@ -19,7 +18,6 @@ class Recipe(models.Model):
     def calculated_cost(self):
 
         recipe_ingredients = RecipeIngredient.objects.filter(recipe=self.id)
-        print(recipe_ingredients)
         total = Decimal(0)
         for ing in recipe_ingredients:
             print(ing.calculated_cost)
@@ -32,7 +30,7 @@ class Recipe(models.Model):
 class Ingredient(models.Model):
 
     name = models.CharField(max_length=100)
-    base_unit = models.CharField(max_length=100)
+    base_unit = models.CharField(max_length=100, null=True, blank=True)
     base_price = models.DecimalField(decimal_places=2, max_digits=1000)
 
     def __str__(self) -> str:
@@ -41,7 +39,7 @@ class Ingredient(models.Model):
 class RecipeIngredient(models.Model):
     
     quantity = models.DecimalField(decimal_places=2, max_digits=1000)
-    unit = models.CharField(max_length=100)
+    unit = models.CharField(max_length=100, null=True, blank=True)
     ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name="recipe_ingredients") # many to one
 

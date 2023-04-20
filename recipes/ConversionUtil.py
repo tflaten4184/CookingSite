@@ -13,8 +13,8 @@ class ConversionUtil():
     
     def convert_ingredient_to_dollars(recipeIngredient, ingredient):
 
-        # First, need to check if the unit is nontraditional (for example, "1 whole onion")
-        if ingredient.base_unit == "whole":
+        # First, need to check if the unit is nontraditional (for example, "1 whole onion") or nonexistent
+        if not ingredient.base_unit or ingredient.base_unit == "whole":
             return float(recipeIngredient.quantity) * float(ingredient.base_price)
 
         ureg = ConversionUtil.ureg
