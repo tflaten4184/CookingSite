@@ -22,3 +22,8 @@ body {
 .border-primary {
     border: 1px solid var(--dim-gray) !important;
 }
+
+.nav-item {
+    padding-inline: 4%;
+    white-space: nowrap;
+}
