@@ -8,7 +8,7 @@ from pint import UnitRegistry
 
 class ConversionUtil():
 
-    print("Initializing UnitRegistry")
+    print("Initializing UnitRegistry") # Why does this print twice?
     ureg = UnitRegistry()
     
     def convert_ingredient_to_dollars(recipeIngredient, ingredient):

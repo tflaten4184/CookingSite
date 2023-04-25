@@ -13,6 +13,7 @@
 
   <div class="container">
     <div>
+      <img src="{% static "logo.png" %}" alt="logo">
       <h1 class="display-1 text-center">
         <i>Tyler's Dinner Inspirations</i>
       </h1>
@@ -37,7 +38,7 @@
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link">Login</a>
+                <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link">Preferences</a>
