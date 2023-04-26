@@ -10,13 +10,22 @@
     <link href="{% static 'recipes/style.css' %}" rel="stylesheet" type="text/css">
 </head>
 <body>
-
   <div class="container">
     <div>
       {% comment %} <img src="{% static "recipes/logo.png" %}" alt="logo" width=100> {% endcomment %}
       {% comment %} <h1 class="display-1 text-center">
         <i>Tyler's Dinner Inspirations</i>
       </h1> {% endcomment %}
+    </div>
+    <div class="text-end">
+      loginstuff
+      {% if request.user.is_authenticated %}
+        Welcome, {{ request.user.username }}!
+        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+      {% else %}
+        <a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a>
+        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+      {% endif %}
     </div>
     <nav class="navbar navbar-expand-xl border border-warning-subtle p-2 rounded">
         <div class="container-fluid rounded">
@@ -40,9 +49,9 @@
                   <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
               </li>
-              <li class="nav-item">
+              {% comment %} <li class="nav-item">
                 <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
-              </li>
+              </li> {% endcomment %}
               <li class="nav-item">
                 <a class="nav-link">Preferences</a>
               </li>
@@ -50,10 +59,10 @@
                 <a class="nav-link">Shopping List</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
+            {% comment %} <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn btn-outline-dark" type="submit">Search</button>
-            </form>
+            </form> {% endcomment %}
           </div>
         </div>
     </nav>
