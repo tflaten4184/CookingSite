@@ -13,14 +13,17 @@
 
   <div class="container">
     <div>
-      <img src="{% static "logo.png" %}" alt="logo">
-      <h1 class="display-1 text-center">
+      {% comment %} <img src="{% static "recipes/logo.png" %}" alt="logo" width=100> {% endcomment %}
+      {% comment %} <h1 class="display-1 text-center">
         <i>Tyler's Dinner Inspirations</i>
-      </h1>
+      </h1> {% endcomment %}
     </div>
     <nav class="navbar navbar-expand-xl border border-warning-subtle p-2 rounded">
         <div class="container-fluid rounded">
-          <a class="navbar-brand" href="{% url 'recipes:index' %}">Home</a>
+          
+          <a class="navbar-brand" href="{% url 'recipes:index' %}">
+            <img src="{% static "recipes/logo.png" %}" alt="logo" width=200>
+            Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>

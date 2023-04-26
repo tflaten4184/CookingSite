@@ -15,6 +15,10 @@ body {
     background-color: rgb(224, 200, 131);
 }
 
+.navbar .navbar-brand, .navbar .nav-item .nav-link, .collapse .navbar-collapse .nav-item .nav-link {
+    color: rgb(121, 38, 0);
+}
+
 .container {
     background: var(--sunset);
 }
@@ -27,3 +31,4 @@ body {
     padding-inline: 4%;
     white-space: nowrap;
 }
+
