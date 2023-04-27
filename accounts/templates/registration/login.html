@@ -3,7 +3,6 @@
 {% block title %}Login{% endblock title %}
 
 {% block body %}
-    Login form goes here
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
