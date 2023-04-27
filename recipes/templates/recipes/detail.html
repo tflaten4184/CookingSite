@@ -18,7 +18,10 @@
         <div class="form-check">
             <input class="form-check-input" type="checkbox" value="" id="flexCheck{{ ingredient.id }}">
             <label class="form-check-label" for="flexCheck{{ ingredient.id }}">
-              {{ ingredient.quantity.normalize }} {{ ingredient.unit }} {{ ingredient.ingredient.name }} <i> (${{ ingredient.calculated_cost }}) </i>
+              {{ ingredient.quantity.normalize }} 
+              {% if ingredient.unit is not None %} {{ ingredient.unit }} {% endif %} 
+              {{ ingredient.ingredient.name }} 
+              <i> (${{ ingredient.calculated_cost }}) </i>
             </label>
         </div>
         {% endfor %}
