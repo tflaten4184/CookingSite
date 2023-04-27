@@ -20,7 +20,6 @@ class Recipe(models.Model):
         recipe_ingredients = RecipeIngredient.objects.filter(recipe=self.id)
         total = Decimal(0)
         for ing in recipe_ingredients:
-            print(ing.calculated_cost)
             total += Decimal(ing.calculated_cost)
         return total
 

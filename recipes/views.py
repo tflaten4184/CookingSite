@@ -13,7 +13,6 @@ def index(request):
 
 def detail(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
-    print(recipe)
     template = loader.get_template("recipes/detail.html")
     context = {
         "recipe": recipe,
