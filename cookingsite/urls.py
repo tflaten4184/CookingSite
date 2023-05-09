@@ -29,7 +29,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('recipes/', include("recipes.urls")),
     path('accounts/', include("accounts.urls")),
-    # path('accounts/', include("django.contrib.auth.urls")),
+    # The following paths go here instead of accounts urls.py due to namespace issues
+    path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
+    path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
