@@ -32,6 +32,8 @@ urlpatterns = [
     # The following paths go here instead of accounts urls.py due to namespace issues
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name="password_reset_confirm"),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name="password_reset_done"),
+    path('', include("django.contrib.auth.urls")),
+
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
