@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.db import models
 from .ConversionUtil import ConversionUtil
+from accounts.models import User
 
 class Recipe(models.Model):
 
@@ -60,3 +61,11 @@ class Step(models.Model):
 
     def __str__(self) -> str:
         return f"Step {self.number} of recipe {self.recipe}: {self.text[:30]}"
+    
+class UserFavoriteRecipe(models.Model):
+    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'recipe',)
