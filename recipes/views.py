@@ -56,14 +56,8 @@ def unfavorite_recipe(request, recipe_id):
 
     # Find the object that relates the user to the recipe, and remove that relationship (destroy the association object)
     if user: # Currently authenticated user is not None
-        # Find matching "Favorite" object, based on current user and recipe ID
-        # Delete the target Favorite object
-        if recipe_id:
-            print(f"favorite = {recipe_id}")
-            
+        if recipe_id:            
             UserFavoriteRecipe.objects.get(user=request.user.id, recipe=recipe_id).delete()
-        # Show some feedback to confirm success
-        pass
 
     return redirect('.')
     
