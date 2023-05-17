@@ -34,11 +34,6 @@ def create(request):
 
 def favorite_recipe(request, recipe_id):
 
-#     # We want to create a relationship between the authenticated user and the recipe on the current page.
-#     # This should only be called from the recipe detail page.
-#     # Technically, we can do this using Django forms. The "Favorite" button will trigger the submission
-#     # to create a new instance of the model UserFavoriteRecipe
-
     user = User.objects.get(username=request.user.username)
     recipe = Recipe.objects.get(id=recipe_id)
 
