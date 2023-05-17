@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractUser, Group, Permission
@@ -21,3 +22,6 @@ class User(AbstractUser):
         related_name='%(app_label)s_%(class)s_user_permissions',  # Add a related name
         related_query_name='%(app_label)s_%(class)s',
     )
+
+
+User = get_user_model()

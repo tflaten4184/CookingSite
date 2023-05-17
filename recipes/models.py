@@ -1,7 +1,10 @@
 from decimal import Decimal
 from django.db import models
+from django.contrib.auth import get_user_model
 from .ConversionUtil import ConversionUtil
 from accounts.models import User
+
+User = get_user_model()
 
 class Recipe(models.Model):
 
@@ -67,5 +70,8 @@ class UserFavoriteRecipe(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return f"User {self.user} favorites recipe {self.recipe}"
+
     class Meta:
-        unique_together = ('user', 'recipe',)
+       unique_together = ('user', 'recipe',)
