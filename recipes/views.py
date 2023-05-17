@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
@@ -47,7 +48,7 @@ def favorite_recipe(request, recipe_id):
         print(new_favorite)
         new_favorite.save()
 
-    return HttpResponse("favorite successful")
+    return redirect('.')
 
 def unfavorite_recipe(request, recipe_id):
 
@@ -64,5 +65,5 @@ def unfavorite_recipe(request, recipe_id):
         # Show some feedback to confirm success
         pass
 
-    return HttpResponse("unfavorite successful (not implemented)")
+    return redirect('.')
     
