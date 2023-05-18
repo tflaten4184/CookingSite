@@ -6,9 +6,9 @@
     <span>
         <h1>{{ recipe.name }}</h1>
         {% if user.is_authenticated and is_favorite %}
-            <form action="{% url 'recipes:unfavorite' recipe.id %}" method="post"><input type="submit" value="Remove Favorite">{% csrf_token %}</form>
+            <form action="{% url 'recipes:unfavorite' recipe.id %}" method="post"><input type="submit" value="Remove Favorite" id="js-unfav">{% csrf_token %}</form>
         {% elif user.is_authenticated and not is_favorite %}
-            <form action="{% url 'recipes:favorite' recipe.id %}" method="post"><input type="submit" value="Add Favorite">{% csrf_token %}</form>
+            <form action="{% url 'recipes:favorite' recipe.id %}" method="post"><input type="submit" value="Add Favorite" id="js-fav">{% csrf_token %}</form>
         {% endif %}
     </span>
     <h4> <i> ${{ recipe.calculated_cost }} </i> </h4>
