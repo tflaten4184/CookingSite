@@ -3,7 +3,15 @@
 {% block title %}Favorites{% endblock title %}
 
 {% block body %}
-    {% for recipe in recipes_list %}
-        {{ recipe }}
-    {% endfor %}
+    {% if recipes_list %}
+        <div class="row">
+            {% for recipe in recipes_list %}
+
+                {% include 'recipes/card.html' %}
+
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No favorites found.</p>
+    {% endif %}
 {% endblock body %}
