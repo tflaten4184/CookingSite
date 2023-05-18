@@ -1,6 +1,6 @@
 {% load thumbnail %}
 
-<div class="card col-md-3 m-3">
+<div class="card col-md-3 m-3 pt-3">
     {% comment %} <img class="card-img-top" src="" alt="Card image cap"> {% endcomment %}
     {% thumbnail recipe.image "240x240" crop="center" as im %}
         <img class="img-fluid w-100" src="{{ im.url }}" alt="{{ recipe.name }} image" width="{{ im.width }}" height="{{ im.height }}">
