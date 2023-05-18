@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block title %}Favorites{% endblock title %}
+
+{% block body %}
+    {% for recipe in recipes_list %}
+        {{ recipe }}
+    {% endfor %}
+{% endblock body %}

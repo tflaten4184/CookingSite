@@ -56,3 +56,24 @@ def unfavorite_recipe(request, recipe_id):
 
     return redirect('.')
     
+def favorites(request):
+
+    template = loader.get_template("recipes/favorites.html")
+
+    user = User.objects.get(username=request.user.username)
+    favorites_list = UserFavoriteRecipe.objects.filter(user=user.id)
+    print(f"favorites list: {favorites_list}")
+    recipes_list = []
+    for favorite in favorites_list:
+        current_recipe = Recipe.objects.get(id=favorite.recipe.id)
+        print(f"current_recipe: {current_recipe}")
+        recipes_list.append(current_recipe)
+    print(recipes_list)
+
+    context = {
+        "recipes_list": recipes_list
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
