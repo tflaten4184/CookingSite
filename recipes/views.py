@@ -1,6 +1,7 @@
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from django.template import loader
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import get_user_model
 
 from accounts.models import User
@@ -33,6 +34,7 @@ def create(request):
     return HttpResponse(template.render(request))
 
 def favorite_recipe(request, recipe_id):
+    print("in favorite_recipe")
 
     user = User.objects.get(username=request.user.username)
     recipe = Recipe.objects.get(id=recipe_id)
@@ -45,6 +47,26 @@ def favorite_recipe(request, recipe_id):
 
     return redirect('.')
 
+# Similar to favorite_recipe, but for AJAX
+@ login_required
+def post_favorite_recipe(request, recipe_id):
+    print(f"in post_favorite_recipe, recipeId is {recipe_id}")
+    print(request.POST)
+    if request.POST.get('action') == 'post':
+        result = ''
+        id = int(request.POST.get('recipeId'))
+        # user = User.objects.get(username=request.user.username)
+        user = get_object_or_404(User, username=request.user.username)
+        recipe = Recipe.objects.get(id=recipe_id)
+
+        # Create UserFavoriteRecipe
+        if user: # Currently authenticated user is not None
+            new_favorite = UserFavoriteRecipe(user=user, recipe=recipe)
+            print(new_favorite)
+            new_favorite.save()
+
+    return JsonResponse({"success":True})
+
 def unfavorite_recipe(request, recipe_id):
 
     user = request.user
@@ -55,6 +77,20 @@ def unfavorite_recipe(request, recipe_id):
             UserFavoriteRecipe.objects.get(user=request.user.id, recipe=recipe_id).delete()
 
     return redirect('.')
+
+# AJAX version of unfavorite_recipe
+@ login_required
+def post_unfavorite_recipe(request, recipe_id):
+
+    user = request.user
+
+    # Find the object that relates the user to the recipe, and remove that relationship (destroy the association object)
+    if user: # Currently authenticated user is not None
+        if recipe_id:            
+            UserFavoriteRecipe.objects.get(user=request.user.id, recipe=recipe_id).delete()
+
+    return JsonResponse({"success":True})
+
     
 def favorites(request):
 
