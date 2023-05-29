@@ -8,6 +8,7 @@ django = "*"
 sorl-thumbnail = "*"
 pillow = "*"
 pint = "*"
+djangorestframework = "*"
 
 [dev-packages]
 

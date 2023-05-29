@@ -19,7 +19,13 @@ def index(request):
 def detail(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     template = loader.get_template("recipes/detail.html")
-    user = User.objects.get(username=request.user)
+    user = None
+    is_favorite = False
+    print("request.user is ", request.user)
+    print(request.user.username)
+    print(type(request.user))
+    if request.user.username:
+        user = User.objects.get(username=request.user)
 
     is_favorite = UserFavoriteRecipe.objects.filter(user=user, recipe=recipe_id)
 
