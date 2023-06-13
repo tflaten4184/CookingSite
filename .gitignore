@@ -3,3 +3,4 @@ Documentation/*
 media/
 static/*
 sent_emails/*
+*/__pycache__/*

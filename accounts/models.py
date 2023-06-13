@@ -5,6 +5,7 @@ from django.utils.translation import gettext as _
 from django.contrib.auth.models import AbstractUser, Group, Permission
 
 class User(AbstractUser):
+    name = models.CharField(max_length=255)
     email = models.EmailField(_('email address'), unique=True)
     groups = models.ManyToManyField(
         Group,
@@ -22,6 +23,10 @@ class User(AbstractUser):
         related_name='%(app_label)s_%(class)s_user_permissions',  # Add a related name
         related_query_name='%(app_label)s_%(class)s',
     )
+    password = models.CharField(max_length=255)
+    username = None
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
 
 User = get_user_model()
