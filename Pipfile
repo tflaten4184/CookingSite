@@ -9,6 +9,7 @@ sorl-thumbnail = "*"
 pillow = "*"
 pint = "*"
 djangorestframework = "*"
+pyjwt = "*"
 
 [dev-packages]
 
