@@ -152,3 +152,4 @@ EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 AUTH_USER_MODEL = "accounts.User"
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True

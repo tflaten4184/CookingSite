@@ -10,6 +10,7 @@ pillow = "*"
 pint = "*"
 djangorestframework = "*"
 pyjwt = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
